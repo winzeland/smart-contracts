@@ -4,6 +4,8 @@ import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
+import "hardhat-deploy";
+import "hardhat-deploy-ethers";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 
@@ -19,21 +21,33 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   }
 });
 
+const accounts =
+  process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [];
+
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
 
 const config: HardhatUserConfig = {
   solidity: "0.8.4",
   networks: {
+    hardhat: {},
+    localhost: {},
     matic: {
       url: "https://polygon-rpc.com/",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts,
     },
     mumbai: {
       url: "https://rpc-mumbai.matic.today",
-      accounts:
-        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+      accounts,
+    },
+    rinkeby: {
+      url: process.env.RINKEBY_URL,
+      accounts,
+    },
+  },
+  namedAccounts: {
+    deployer: {
+      default: 0,
     },
   },
   gasReporter: {
