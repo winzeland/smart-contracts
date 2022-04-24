@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 
 contract ResourcesERC1155 is ERC1155, Ownable {
-    constructor() ERC1155("https://game.example/api/item/{id}.json") {
+    constructor() ERC1155("https://www.winzeland.com/api/item/{id}.json") {
         // _mint(msg.sender, GOLD, 10**18, "");
     }
 

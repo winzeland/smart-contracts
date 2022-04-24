@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "../ERC721Tradable.sol";
 
-contract ERC721Character is ERC721Tradable {
+contract WinzerERC721 is ERC721Tradable {
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
@@ -27,9 +27,9 @@ contract ERC721Character is ERC721Tradable {
 
     mapping(uint256 => DNA) public dna;
 
-    string private __baseURI = "https://www.yonder.network/meta/character/";
+    string private __baseURI = "https://www.winzerland.com/meta/character/";
 
-    constructor() ERC721Tradable("Yonderer Test", "Yonderer") {}
+    constructor() ERC721Tradable("Winzerland: Winzer", "Winzer") {}
 
     function mint(address player, DNA memory _dna)
         public onlyRole(MINTER_ROLE)

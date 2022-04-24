@@ -8,7 +8,7 @@ import { ethers, getNamedAccounts } from "hardhat";
 async function main() {
   const { deployer } = await getNamedAccounts();
   // @ts-ignore
-  const characters = await ethers.getContract("ERC721Character");
+  const characters = await ethers.getContract("WinzerERC721");
 
   const tx = await characters.grantRole(
     ethers.utils.id("MINTER_ROLE"),

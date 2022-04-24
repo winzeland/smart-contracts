@@ -5,29 +5,15 @@
 // Runtime Environment's members available in the global scope.
 import { ethers, getNamedAccounts } from "hardhat";
 
-const random = (min: number = 0, max: number = 256) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
 async function main() {
   const { deployer } = await getNamedAccounts();
-
   // @ts-ignore
-  const characters = await ethers.getContract("WinzerERC721");
+  const characters = await ethers.getContract("GubbinsERC20");
 
-  const sex = random(0, 1);
-
-  const tx = await characters.mint(deployer, {
-    race: 0,
-    sex,
-    skill: random(0, 12),
-    hair: random(0, 12),
-    beard: sex === 0 ? random(0, 12) : 0,
-    skin: random(0, 5),
-    face: random(0, 8),
-    eyes: random(0, 24),
-    mouth: random(0, 24),
-  });
+  const tx = await characters.grantRole(
+    ethers.utils.id("MINTER_ROLE"),
+    deployer
+  );
 
   await tx.wait();
 }

@@ -16,12 +16,12 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
  * MINTER_ROLE          - CoinEngraver, takes gold bars and gives coins for a fee
  * BURNER_ROLE          - CoinEngraver, takes coins and gives gold bars for a fee
  */
-contract PennyERC20 is ERC20, AccessControl {
+contract GubbinsERC20 is ERC20, AccessControl {
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
 
-    constructor() ERC20("Penny of the Kingdom", "Penny") {
+    constructor() ERC20("Gubbins", "GBN") {
         _grantRole(DEFAULT_ADMIN_ROLE, _msgSender());
     }
 

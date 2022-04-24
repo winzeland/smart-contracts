@@ -1,5 +1,5 @@
 {
-  "name": "polygon-kingdom-smart-contracts",
+  "name": "winzerland-smart-contracts",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-etherscan": "^3.0.3",

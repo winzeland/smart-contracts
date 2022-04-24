@@ -71,7 +71,7 @@ contract CoinEngraver is Ownable {
      * @dev send pennies to receive gold bars.
      */
     function burn(uint256 _sentAmount) public {
-        PennyERC20 penny = coinageLaws.token();
+        GubbinsERC20 penny = coinageLaws.token();
         require(penny.balanceOf(_msgSender()) >= _sentAmount, "coiner: no gold bars");
 
         (uint256 amount, uint256 fee) = getExpectedBurnReturn(_sentAmount);

@@ -7,12 +7,12 @@ const func: DeployFunction = async function ({
 }: HardhatRuntimeEnvironment) {
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
-  await deploy("ERC721Character", {
+  await deploy("WinzerERC721", {
     from: deployer,
     log: true,
   });
 };
 
-func.tags = ["ERC721Character"];
+func.tags = ["WinzerERC721"];
 
 export default func;

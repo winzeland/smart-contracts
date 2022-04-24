@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "../PennyERC20.sol";
+import "../GubbinsERC20.sol";
 import "../resources/ResourcesERC1155.sol";
 
 /**
@@ -16,8 +16,8 @@ import "../resources/ResourcesERC1155.sol";
 contract CoinageLaws is Ownable {
     // who collects fees for minting and burning coins (governance / kingdom treasury)
     address public feeCollector;
-    // erc-20 token (penny token)
-    PennyERC20 public token;
+    // erc-20 token (gubbins token)
+    GubbinsERC20 public token;
     // erc-1155 token (resources)
     ResourcesERC1155 public resources;
     // resource token id (gold bar)
@@ -34,7 +34,7 @@ contract CoinageLaws is Ownable {
     uint16 public dynamicBurningFee = 50;
 
     constructor(address _token, address _resources, uint256 _tokenId) {
-        token = PennyERC20(_token);
+        token = GubbinsERC20(_token);
         resources = ResourcesERC1155(_resources);
         resourceId = _tokenId;
     }
