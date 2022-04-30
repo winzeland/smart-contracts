@@ -4,6 +4,8 @@ coverage
 coverage.json
 typechain
 deployments
+dist
+build
 
 #Hardhat files
 cache

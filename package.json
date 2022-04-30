@@ -1,5 +1,28 @@
 {
-  "name": "winzerland-smart-contracts",
+  "name": "@winzerland/smart-contracts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "contracts",
+    "dist",
+    "src",
+    "test",
+    "build"
+  ],
+  "scripts": {
+    "build": "hardhat compile",
+    "build:ts": "yarn rimraf dist && tsc",
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "deploy-all": "hardhat deploy-contracts --network",
+    "deploy": "hardhat deploy --network",
+    "prepack": "yarn build",
+    "prepublish": "yarn rimraf build && yarn build && yarn build:ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/winzeland/smart-contracts.git"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-etherscan": "^3.0.3",
