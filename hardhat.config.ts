@@ -30,7 +30,9 @@ const accounts =
 const config: HardhatUserConfig = {
   solidity: "0.8.4",
   networks: {
-    hardhat: {},
+    hardhat: {
+      chainId: 1337,
+    },
     localhost: {},
     matic: {
       url: "https://polygon-rpc.com/",
