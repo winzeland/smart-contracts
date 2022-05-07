@@ -1,5 +1,5 @@
 {
-  "name": "@winzerland/smart-contracts",
+  "name": "@winzeland/smart-contracts",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [
