@@ -16,9 +16,11 @@ contract LandERC721 is ERC721Tradable {
         uint8 resource1;
         uint8 resource2;
         uint8 resource3;
+        uint8 resource4;
         uint8 resourceLevel1;
         uint8 resourceLevel2;
         uint8 resourceLevel3;
+        uint8 resourceLevel4;
     }
 
     event DnaUpdated(uint256 indexed _tokenId, DNA _dna);
@@ -62,5 +64,9 @@ contract LandERC721 is ERC721Tradable {
 
     function setBaseUri(string memory uri) public onlyRole(DEFAULT_ADMIN_ROLE) {
         __baseURI = uri;
+    }
+
+    function contractURI() public pure returns (string memory) {
+        return "https://www.winzeland.com/meta/contract/lands";
     }
 }

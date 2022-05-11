@@ -28,9 +28,9 @@ contract ResourceERC1151 is ERC721Tradable {
 
     mapping(uint256 => DNA) public dna;
 
-    string private __baseURI = "https://www.yonder.network/meta/resources/";
+    string private __baseURI = "https://www.winzeland.network/meta/resources/";
 
-    constructor() ERC721Tradable("Yonder: Resource", "Resource") {}
+    constructor() ERC721Tradable("Winzeland: Resource", "Resource") {}
 
     function mint(address player, DNA memory _dna)
         public onlyRole(MINTER_ROLE)

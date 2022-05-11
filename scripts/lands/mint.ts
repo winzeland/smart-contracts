@@ -12,7 +12,6 @@ const random = (min: number = 0, max: number = 256) => {
 async function main() {
   const { deployer } = await getNamedAccounts();
 
-  // @ts-ignore
   const lands = await ethers.getContract("LandERC721");
 
   const sex = random(0, 1);

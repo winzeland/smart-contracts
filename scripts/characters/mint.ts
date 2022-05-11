@@ -4,12 +4,11 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 import { ethers, getNamedAccounts } from "hardhat";
-import { randomizeWinzerLogically } from '@winzeland/winzer/dist';
+import { randomizeWinzerLogically } from "@winzeland/winzer/dist";
 
 async function main() {
   const { deployer } = await getNamedAccounts();
 
-  // @ts-ignore
   const characters = await ethers.getContract("WinzerERC721");
 
   const traits = randomizeWinzerLogically();

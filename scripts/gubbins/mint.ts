@@ -8,7 +8,6 @@ import { ethers, getNamedAccounts } from "hardhat";
 async function main() {
   const { deployer } = await getNamedAccounts();
 
-  // @ts-ignore
   const token = await ethers.getContract("GubbinsERC20");
 
   const tx = await token.mint(deployer, ethers.utils.parseEther("100"));

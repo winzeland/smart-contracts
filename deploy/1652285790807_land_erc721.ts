@@ -33,9 +33,11 @@ const func: DeployFunction = async function ({
       resource1: 1,
       resource2: 2,
       resource3: 0,
+      resource4: 0,
       resourceLevel1: 1,
       resourceLevel2: 0,
       resourceLevel3: 0,
+      resourceLevel4: 0,
     });
 
     await mint.wait();

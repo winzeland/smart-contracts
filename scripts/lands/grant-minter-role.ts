@@ -7,7 +7,6 @@ import { ethers, getNamedAccounts } from "hardhat";
 
 async function main() {
   const { deployer } = await getNamedAccounts();
-  // @ts-ignore
   const lands = await ethers.getContract("LandERC721");
 
   const tx = await lands.grantRole(ethers.utils.id("MINTER_ROLE"), deployer);

@@ -3,9 +3,9 @@ import * as dotenv from "dotenv";
 import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-ethers";
 import "@typechain/hardhat";
 import "hardhat-deploy";
-import "hardhat-deploy-ethers";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 
@@ -32,8 +32,11 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {
       chainId: 1337,
+      tags: ["testnet"],
     },
-    localhost: {},
+    localhost: {
+      tags: ["testnet"],
+    },
     matic: {
       url: "https://polygon-rpc.com/",
       accounts,
@@ -41,10 +44,12 @@ const config: HardhatUserConfig = {
     mumbai: {
       url: "https://rpc-mumbai.matic.today",
       accounts,
+      tags: ["testnet"],
     },
     rinkeby: {
       url: process.env.RINKEBY_URL,
       accounts,
+      tags: ["testnet"],
     },
   },
   namedAccounts: {
