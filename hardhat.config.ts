@@ -38,6 +38,11 @@ const config: HardhatUserConfig = {
         ? [process.env.MAINNET_DEPLOYER_PKEY]
         : [],
       tags: ["mainnet", "matic"],
+      verify: {
+        etherscan: {
+          apiUrl: "https://api.polygonscan.com",
+        },
+      },
     },
     // DEV
     hardhat: {
@@ -52,6 +57,11 @@ const config: HardhatUserConfig = {
       url: "https://matic-mumbai.chainstacklabs.com",
       accounts,
       tags: ["testnet"],
+      verify: {
+        etherscan: {
+          apiUrl: "https://mumbai.api.polygonscan.com",
+        },
+      },
     },
     rinkeby: {
       url: process.env.RINKEBY_URL,
