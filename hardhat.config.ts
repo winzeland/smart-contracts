@@ -49,7 +49,7 @@ const config: HardhatUserConfig = {
     },
     // TESTNET
     mumbai: {
-      url: "https://rpc-mumbai.matic.today",
+      url: "https://matic-mumbai.chainstacklabs.com",
       accounts,
       tags: ["testnet"],
     },
