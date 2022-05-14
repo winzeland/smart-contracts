@@ -40,11 +40,7 @@ async function main() {
     skill5: 0,
   };
 
-  const tx = await characters.mint(
-    "0x1cA70D17835Bf5D683e70115dCF218dC02062cA7",
-    dna,
-    extra
-  );
+  const tx = await characters.mint(deployer, dna, extra);
 
   await tx.wait();
 }
