@@ -8,8 +8,9 @@
     "declaration": true,
     "allowJs": true,
     "skipLibCheck": true,
+    "baseUrl": "."
   },
   "exclude": ["dist", "node_modules"],
-  "include": ["./scripts", "./deploy", "./test", "./typechain"],
+  "include": ["./scripts", "./deploy", "./test", "./typechain", "./utils"],
   "files": ["./hardhat.config.ts"]
 }

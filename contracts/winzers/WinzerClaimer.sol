@@ -36,8 +36,8 @@ contract WinzerClaimer is Context {
         WinzerERC721.DNA2 memory _extraDna;
         _extraDna.makeup = random(12, 6);
         _extraDna.accessory = random(13, 13);
-        _extraDna.father = random(14, uint8(winzerContract.totalSupply()));
-        _extraDna.mother = random(15, uint8(winzerContract.totalSupply()));
+        _extraDna.father = random(14, uint8(winzerContract.totalSupply() - 1));
+        _extraDna.mother = random(15, uint8(winzerContract.totalSupply() - 1));
     
         return winzerContract.mint(_msgSender(), _dna, _extraDna);
     }

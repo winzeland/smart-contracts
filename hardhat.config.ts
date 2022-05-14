@@ -21,8 +21,9 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   }
 });
 
-const accounts =
-  process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [];
+const accounts = process.env.TESTNET_DEPLOYER_PKEY
+  ? [process.env.TESTNET_DEPLOYER_PKEY]
+  : [];
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -30,6 +31,15 @@ const accounts =
 const config: HardhatUserConfig = {
   solidity: "0.8.4",
   networks: {
+    // MAINNET
+    matic: {
+      url: "https://polygon-rpc.com/",
+      accounts: process.env.MAINNET_DEPLOYER_PKEY
+        ? [process.env.MAINNET_DEPLOYER_PKEY]
+        : [],
+      tags: ["mainnet", "matic"],
+    },
+    // DEV
     hardhat: {
       chainId: 1337,
       tags: ["testnet"],
@@ -37,10 +47,7 @@ const config: HardhatUserConfig = {
     localhost: {
       tags: ["testnet"],
     },
-    matic: {
-      url: "https://polygon-rpc.com/",
-      accounts,
-    },
+    // TESTNET
     mumbai: {
       url: "https://rpc-mumbai.matic.today",
       accounts,

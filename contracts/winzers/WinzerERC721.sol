@@ -41,13 +41,16 @@ contract WinzerERC721 is ERC721Tradable {
     mapping(uint256 => DNA1) public dna1;
     mapping(uint256 => DNA2) public dna2;
 
-    string private __baseURI = "https://www.winzeland.com/meta/character/";
+    string private __baseURI;
+    string private __contractURI;
 
-    constructor() ERC721Tradable("Winzeland: Winzer", "Winzer") {
-        // minting "AllFather" as first character with all zero traits.
+    constructor(address _fatherReceiver, string memory _initBaseURI, string memory _initContractURI) ERC721Tradable("Winzeland: Winzer", "Winzer") {
+        __baseURI = _initBaseURI;
+        __contractURI = _initContractURI;
+        // minting "AllFather" as first winzer with all zero traits.
         DNA1 memory _dna1;
         DNA2 memory _dna2;
-        _mint(_msgSender(), 0);
+        _mint(_fatherReceiver, 0);
         _setDna1(0, _dna1);
         _setExtraDna(0, _dna2);
     }
@@ -83,7 +86,11 @@ contract WinzerERC721 is ERC721Tradable {
         __baseURI = uri;
     }
 
-    function contractURI() public pure returns (string memory) {
-        return "https://www.winzeland.com/meta/contract/winzers";
+    function contractURI() public view returns (string memory) {
+        return __contractURI;
+    }
+
+    function setContractURI(string memory uri) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        __contractURI = uri;
     }
 }

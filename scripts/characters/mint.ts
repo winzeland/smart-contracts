@@ -29,6 +29,8 @@ async function main() {
   };
 
   const extra = {
+    father: 0,
+    mother: 0,
     accessory: traits.accessories,
     makeup: traits.makeup,
     skill1: 0,
@@ -38,7 +40,11 @@ async function main() {
     skill5: 0,
   };
 
-  const tx = await characters.mint(deployer, dna, extra);
+  const tx = await characters.mint(
+    "0x1cA70D17835Bf5D683e70115dCF218dC02062cA7",
+    dna,
+    extra
+  );
 
   await tx.wait();
 }

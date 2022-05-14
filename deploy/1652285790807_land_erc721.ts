@@ -46,4 +46,6 @@ const func: DeployFunction = async function ({
 
 func.tags = ["LandERC721"];
 
+func.skip = () => Promise.resolve(true);
+
 export default func;
