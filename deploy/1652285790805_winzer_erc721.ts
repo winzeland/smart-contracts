@@ -25,4 +25,7 @@ const func: DeployFunction = async function ({
 
 func.tags = ["WinzerERC721"];
 
+// already deployed to mainnet
+func.skip = (env) => Promise.resolve(env.network.name === "matic");
+
 export default func;

@@ -20,7 +20,7 @@
     "deploy": "hardhat deploy --network",
     "prepack": "yarn build",
     "prepublish": "yarn rimraf build && yarn build && yarn build:ts",
-    "migrate": "node ./bin/create-deployment.js",
+    "make:deployment": "node ./bin/create-deployment-migration.js",
     "verify": "hardhat etherscan-verify --network"
   },
   "repository": {
