@@ -3,7 +3,7 @@
 //
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
-import { ethers, getNamedAccounts } from "hardhat";
+import { ethers, getNamedAccounts } from 'hardhat';
 
 const random = (min: number = 0, max: number = 256) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -12,7 +12,7 @@ const random = (min: number = 0, max: number = 256) => {
 async function main() {
   const { deployer } = await getNamedAccounts();
 
-  const lands = await ethers.getContract("LandERC721");
+  const lands = await ethers.getContract('LandERC721');
 
   const sex = random(0, 1);
 
@@ -33,7 +33,7 @@ async function main() {
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-main().catch((error) => {
+main().catch(error => {
   console.error(error);
   process.exitCode = 1;
 });

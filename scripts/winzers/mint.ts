@@ -3,13 +3,13 @@
 //
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
-import { ethers, getNamedAccounts } from "hardhat";
-import { randomizeWinzerLogically } from "@winzeland/winzer/dist";
+import { ethers, getNamedAccounts } from 'hardhat';
+import { randomizeWinzerLogically } from '@winzeland/winzer/dist';
 
 async function main() {
   const { deployer } = await getNamedAccounts();
 
-  const characters = await ethers.getContract("WinzerERC721");
+  const characters = await ethers.getContract('WinzerERC721');
 
   const traits = randomizeWinzerLogically();
 
@@ -47,7 +47,7 @@ async function main() {
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-main().catch((error) => {
+main().catch(error => {
   console.error(error);
   process.exitCode = 1;
 });
