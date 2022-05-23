@@ -58,5 +58,19 @@ export const getRandomLandAndSign = async (
     traits,
     hash,
     signature,
+    land: {
+      x,
+      y,
+      climate: traits[2],
+      landType: traits[3],
+      resource1: traits[4],
+      resource2: traits[5],
+      resource3: traits[6],
+      resource4: traits[7],
+      resourceLevel1: traits[8],
+      resourceLevel2: traits[9],
+      resourceLevel3: traits[10],
+      resourceLevel4: traits[11],
+    },
   };
 };

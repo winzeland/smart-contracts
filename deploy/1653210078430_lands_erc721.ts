@@ -28,8 +28,6 @@ const func: DeployFunction = async function ({
     args: [land.address, signer],
   });
 
-  console.log('signer address', signer);
-
   if (land.newlyDeployed || claimer.newlyDeployed) {
     const deployedLand = await ethers.getContract('LandERC721');
 
@@ -39,15 +37,6 @@ const func: DeployFunction = async function ({
     );
     await tx.wait();
   }
-
-  const actualClaimer = await ethers.getContract('LandClaimer');
-
-  const tx = await actualClaimer.mint(
-    ['1', '1', '2', '2', '5', '4', '3', '5', '6', '4', '2', '2'],
-    '0x507f49509d618bdbb57e7d922b128381120b11fa347a268747389f21d485da9e7e401233a4e0ed0aec484b22959a7f35eefc1cebd2ff176b03b39fecb189af911c',
-  );
-
-  await tx.wait();
 };
 
 export default func;
