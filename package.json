@@ -19,6 +19,7 @@
     "deploy-all": "hardhat deploy-contracts --network",
     "deploy": "hardhat deploy --network",
     "prepack": "yarn build",
+    "script": "hardhat run --network",
     "prepublish": "yarn rimraf build && yarn build && yarn build:ts",
     "make:deployment": "node ./bin/create-deployment-migration.js",
     "verify": "hardhat etherscan-verify --network"

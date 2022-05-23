@@ -10,7 +10,6 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
     "outDir": "./dist"
   },
   "exclude": ["dist", "typechain", "cache", "artifacts", "node_modules", "bin"],

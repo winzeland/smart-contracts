@@ -43,7 +43,7 @@ const config: HardhatUserConfig = {
     matic: {
       url: 'https://polygon-rpc.com/',
       accounts: process.env.MAINNET_DEPLOYER_PKEY
-        ? [process.env.MAINNET_DEPLOYER_PKEY]
+        ? [process.env.MAINNET_DEPLOYER_PKEY, process.env.SIGNER_PKEY!]
         : [],
       tags: ['mainnet', 'matic'],
       verify: {
@@ -80,6 +80,10 @@ const config: HardhatUserConfig = {
   namedAccounts: {
     deployer: {
       default: 0,
+    },
+    signer: {
+      default: 0,
+      matic: 1,
     },
   },
   gasReporter: {

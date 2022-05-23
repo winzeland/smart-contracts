@@ -9,8 +9,8 @@ contract LandERC721 is ERC721Tradable {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
     struct Properties {
-        uint8 x;
-        uint8 y;
+        int8 x;
+        int8 y;
         uint8 climate;
         uint8 landType;
         uint8 resource1;
@@ -27,8 +27,8 @@ contract LandERC721 is ERC721Tradable {
 
     mapping(uint256 => Properties) public properties;
     // x -> y -> token id
-    mapping(uint8 => mapping(uint8 => uint256)) public coordinates;
-    mapping(uint8 => mapping(uint8 => bool)) public coordinatesTaken;
+    mapping(int8 => mapping(int8 => uint256)) public coordinates;
+    mapping(int8 => mapping(int8 => bool)) public coordinatesTaken;
 
     string private __baseURI;
     string private __contractURI;
