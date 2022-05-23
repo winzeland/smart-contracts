@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "module": "commonjs",
+    "moduleResolution": "node",
     "strict": true,
     "esModuleInterop": true,
-    "outDir": "dist",
     "declaration": true,
     "allowJs": true,
     "skipLibCheck": true,
-    "baseUrl": "."
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "./dist"
   },
-  "exclude": ["dist", "node_modules"],
-  "include": ["./scripts", "./deploy", "./test", "./typechain", "./utils"],
+  "exclude": ["dist", "typechain", "cache", "artifacts", "node_modules", "bin"],
+  "include": ["deploy", "scripts", "test", "utils"],
   "files": ["./hardhat.config.ts"]
 }

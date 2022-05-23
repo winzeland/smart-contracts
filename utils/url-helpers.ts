@@ -1,7 +1,7 @@
 const baseUrlMap: Record<string, string> = {
-  matic: "https://www.winzeland.com",
-  mumbai: "https://testnet.winzeland.com",
-  rinkeby: "https://rinkeby.winzeland.com",
+  matic: 'https://www.winzeland.com',
+  mumbai: 'https://testnet.winzeland.com',
+  rinkeby: 'https://rinkeby.winzeland.com',
 };
 
 export const buildBaseNftMetadataUrl = (network: string, path: string) => {

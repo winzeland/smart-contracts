@@ -8,9 +8,9 @@ contract LandERC721 is ERC721Tradable {
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    struct DNA {
-        uint8 x;
-        uint8 y;
+    struct Properties {
+        int8 x;
+        int8 y;
         uint8 climate;
         uint8 landType;
         uint8 resource1;
@@ -23,39 +23,55 @@ contract LandERC721 is ERC721Tradable {
         uint8 resourceLevel4;
     }
 
-    event DnaUpdated(uint256 indexed _tokenId, DNA _dna);
+    event PropertiesUpdated(uint256 indexed _tokenId, Properties _props);
 
-    mapping(uint256 => DNA) public dna;
+    mapping(uint256 => Properties) public properties;
     // x -> y -> token id
-    mapping(uint8 => mapping(uint8 => uint256)) public coordinates;
-    mapping(uint8 => mapping(uint8 => bool)) public coordinatesTaken;
+    mapping(int8 => mapping(int8 => uint256)) public coordinates;
+    mapping(int8 => mapping(int8 => bool)) public coordinatesTaken;
 
-    string private __baseURI = "https://www.winzeland.network/meta/land/";
+    string private __baseURI;
+    string private __contractURI;
 
-    constructor() ERC721Tradable("Winzeland: Land", "Land") {}
+    constructor(address _genesisReceiver, string memory _initBaseURI, string memory _initContractURI) ERC721Tradable("Winzeland: Land", "Land") {
+        __baseURI = _initBaseURI;
+        __contractURI = _initContractURI;
+        // Mint genesis land
+        Properties memory _properties;
+        _properties.landType = 99;
+        _properties.resource1 = 1;
+        _properties.resource2 = 2;
+        _properties.resource3 = 3;
+        _properties.resource4 = 4;
+        _properties.resourceLevel1 = 10;
+        _properties.resourceLevel2 = 10;
+        _properties.resourceLevel3 = 10;
+        _properties.resourceLevel4 = 10;
+        _setProperties(0, _properties);
+        _mint(_genesisReceiver, 0);
+    }
 
-    function mint(address player, DNA memory _dna)
+    function mint(address player, Properties memory _properties)
         public onlyRole(MINTER_ROLE)
         returns (uint256) 
     {
-        require(coordinatesTaken[_dna.x][_dna.y] == false, "Land: already minted.");
+        require(coordinatesTaken[_properties.x][_properties.y] == false, "Land: already minted.");
 
         uint256 newItemId = totalSupply();
-        _mint(player, newItemId);
 
-        _setDna(newItemId, _dna);
+        _setProperties(newItemId, _properties);
+        _mint(player, newItemId);
 
         return newItemId;
     }
 
-    function _setDna(uint256 _tokenId, DNA memory _dna) internal {
+    function _setProperties(uint256 _tokenId, Properties memory _properties) internal {
+        coordinatesTaken[_properties.x][_properties.y] = true;
+        coordinates[_properties.x][_properties.y] = _tokenId;
 
-        coordinates[_dna.x][_dna.y] = _tokenId;
-        coordinatesTaken[_dna.x][_dna.y] = true;
+        properties[_tokenId] = _properties;
 
-        dna[_tokenId] = _dna;
-
-        emit DnaUpdated(_tokenId, _dna);
+        emit PropertiesUpdated(_tokenId, _properties);
     }
 
     function _baseURI() internal view override returns (string memory) {
@@ -66,7 +82,11 @@ contract LandERC721 is ERC721Tradable {
         __baseURI = uri;
     }
 
-    function contractURI() public pure returns (string memory) {
-        return "https://www.winzeland.com/meta/contract/lands";
+    function contractURI() public view returns (string memory) {
+        return __contractURI;
+    }
+
+    function setContractURI(string memory uri) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        __contractURI = uri;
     }
 }

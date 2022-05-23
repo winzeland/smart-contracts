@@ -3,21 +3,21 @@
 //
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
-import { ethers, getNamedAccounts } from "hardhat";
+import { ethers, getNamedAccounts } from 'hardhat';
 
 async function main() {
   const { deployer } = await getNamedAccounts();
 
-  const token = await ethers.getContract("GubbinsERC20");
+  const token = await ethers.getContract('GubbinsERC20');
 
-  const tx = await token.mint(deployer, ethers.utils.parseEther("100"));
+  const tx = await token.mint(deployer, ethers.utils.parseEther('100'));
 
   await tx.wait();
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-main().catch((error) => {
+main().catch(error => {
   console.error(error);
   process.exitCode = 1;
 });

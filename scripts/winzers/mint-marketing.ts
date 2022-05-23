@@ -1,9 +1,9 @@
-import { randomizeWinzerLogically } from "@winzeland/winzer/dist";
-import { ethers, getNamedAccounts } from "hardhat";
+import { randomizeWinzerLogically } from '@winzeland/winzer/dist';
+import { ethers, getNamedAccounts } from 'hardhat';
 
 async function main() {
   const { deployer } = await getNamedAccounts();
-  const airdroper = await ethers.getContract("WinzerMarketingAirdrop");
+  const airdroper = await ethers.getContract('WinzerMarketingAirdrop');
 
   const traits = randomizeWinzerLogically();
 
@@ -26,12 +26,12 @@ async function main() {
 
   const tx = await mint.wait();
 
-  console.log("tx", tx.transactionHash);
+  console.log('tx', tx.transactionHash);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-main().catch((error) => {
+main().catch(error => {
   console.error(error);
   process.exitCode = 1;
 });

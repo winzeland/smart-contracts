@@ -19,6 +19,7 @@
     "deploy-all": "hardhat deploy-contracts --network",
     "deploy": "hardhat deploy --network",
     "prepack": "yarn build",
+    "script": "hardhat run --network",
     "prepublish": "yarn rimraf build && yarn build && yarn build:ts",
     "make:deployment": "node ./bin/create-deployment-migration.js",
     "verify": "hardhat etherscan-verify --network"
@@ -56,7 +57,8 @@
     "hardhat-deploy-ethers": "^0.3.0-beta.13",
     "hardhat-gas-reporter": "^1.0.8",
     "prettier": "^2.6.1",
-    "prettier-plugin-solidity": "^1.0.0-beta.13",
+    "prettier-config-solidity": "^1.7.0",
+    "prettier-plugin-solidity": "^1.0.0-beta.19",
     "solhint": "^3.3.7",
     "solidity-coverage": "^0.7.20",
     "ts-node": "^10.7.0",
