@@ -5,10 +5,10 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
- * @title WinzerTradableProxyRegistryV2
+ * @title TradableProxyRegistry
  * Approves marketplace contract (opensea) for gassless transactions.
  */
-contract WinzerTradableProxyRegistryV2 is Ownable {
+contract TradableProxyRegistry is Ownable {
     mapping(address => bool) public whitelistedOperators;
 
     event OperatorAdded(address _operator);

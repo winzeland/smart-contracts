@@ -2,27 +2,26 @@
 
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts/token/ERC1155/IERC1155.sol";
+import "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol";
+import "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
 import "@openzeppelin/contracts/access/AccessControlEnumerable.sol";
 import "../extras/TradableProxyRegistry.sol";
 import "./ContextMixin.sol";
 
 /**
- * @title ERC721TradableMixin
- * ERC721TradableMixin - ERC721 contract that whitelists a trading address
+ * @title ERC1155TradableMixin
+ * ERC1151TradableMixin - ERC1151 contract that whitelists a trading address
  */
-abstract contract ERC721TradableMixin is ERC721Enumerable, AccessControlEnumerable, ContextMixin {
+abstract contract ERC1155TradableMixin is ERC1155Supply, AccessControlEnumerable, ContextMixin {
     address public proxyRegistryAddress;
 
     event ProxyRegistryAddressChanged(address indexed _newAddress);
 
     constructor(
-        string memory _name,
-        string memory _symbol
-    ) ERC721(_name, _symbol) {
+        string memory uri_
+    ) ERC1155(uri_) {
         _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
     }
 
@@ -49,8 +48,8 @@ abstract contract ERC721TradableMixin is ERC721Enumerable, AccessControlEnumerab
         emit ProxyRegistryAddressChanged(_proxyRegistryAddress);
     }
 
-    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC721Enumerable, AccessControlEnumerable) returns (bool) {
-        return interfaceId == type(IERC721Enumerable).interfaceId
+    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155, AccessControlEnumerable) returns (bool) {
+        return interfaceId == type(ERC1155Supply).interfaceId
          || interfaceId == type(IAccessControlEnumerable).interfaceId
          || super.supportsInterface(interfaceId);
     }
