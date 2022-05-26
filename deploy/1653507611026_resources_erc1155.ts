@@ -18,4 +18,6 @@ const func: DeployFunction = async function ({
   });
 };
 
+func.tags = ['ResourcesERC1155'];
+
 export default func;

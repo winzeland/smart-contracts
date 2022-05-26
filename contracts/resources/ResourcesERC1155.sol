@@ -35,6 +35,7 @@ contract ResourcesERC1155 is ERC1155TradableMixin {
         tokenCount = tokenCount + 1;
 
         items[id] = _metadata;
+        registeredItems[id] = true;
         _mint(_msgSender(), id, 0, "");
 
         emit ResourceRegistered(id, _metadata);
