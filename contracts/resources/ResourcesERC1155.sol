@@ -34,8 +34,8 @@ contract ResourcesERC1155 is ERC1155TradableMixin {
         int8 value6;
     }
 
-    event ResourceRegistered(uint256 _id, Metadata _metadata);
-    event AttributesUpdated(uint256 _id, Attributes _attributes);
+    event MetadataUpdated(uint256 indexed _id, Metadata _metadata);
+    event AttributesUpdated(uint256 indexed _id, Attributes _attributes);
 
     mapping(uint256 => Metadata) public metadata;
     mapping(uint256 => Attributes) public attributes;
@@ -64,15 +64,20 @@ contract ResourcesERC1155 is ERC1155TradableMixin {
         _burn(account, id, value);
     }
 
-    function registerItem(uint256 _id, Metadata calldata _metadata) public onlyRole(CREATOR_ROLE) returns (uint256) {
+    function registerItem(uint256 _id, Metadata calldata _metadata) public onlyRole(CREATOR_ROLE) {
         require(!_registered[_id], "resource already registered.");
-        metadata[_id] = _metadata;
         _registered[_id] = true;
+        metadata[_id] = _metadata;
+
         _mint(_msgSender(), _id, 0, "");
 
-        emit ResourceRegistered(_id, _metadata);
+        emit MetadataUpdated(_id, _metadata);
+    }
 
-        return _id;
+    function updateMetadata(uint256 _id, Metadata calldata _metadata) public onlyRole(CREATOR_ROLE) {
+        require(_registered[_id], "resource is not registered.");
+        metadata[_id] = _metadata;
+        emit MetadataUpdated(_id, _metadata);
     }
 
     function updateAttributes(uint256 _id, Attributes calldata _attributes) public onlyRole(CREATOR_ROLE) {

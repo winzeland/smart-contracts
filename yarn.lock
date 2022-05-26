@@ -1150,10 +1150,10 @@
   resolved "https://registry.yarnpkg.com/@ungap/promise-all-settled/-/promise-all-settled-1.1.2.tgz#aa58042711d6e3275dd37dc597e5d31e8c290a44"
   integrity sha512-sL/cEvJWAnClXw0wHk85/2L0G6Sj8UB0Ctc1TEMbKSsmpRosqhwj9gWgFRZSrBr2f9tiXISwNhCPmlfqUqyb9Q==
 
-"@winzeland/resources@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@winzeland/resources/-/resources-0.2.1.tgz#14424211f526f3c42f917b50f2bff186417a2f62"
-  integrity sha512-W0quUZxTE7R0E9MsDlBOBMmTeIr/TbOjfa3+l5g9NB9DfTJXK7svYgltZnRo0z3Nxkg3maSLpFRpF4NYI6S7bw==
+"@winzeland/resources@^0.2.5":
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/@winzeland/resources/-/resources-0.2.5.tgz#a588b0c290855a1855e320249523a4c49c17a345"
+  integrity sha512-n9FVPC1g7C2Yi1REk4Tf+8eiQixGAKZL815Glu3zW9GzPUUsQlX/pjskoy8C/FT35FK04DnnvoJm+EUQ6aw7Mg==
 
 "@winzeland/winzer@^0.1.1-alpha.1":
   version "0.1.1-alpha.1"

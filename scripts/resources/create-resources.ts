@@ -1,8 +1,8 @@
 import { ethers } from 'hardhat';
-import { listAllResources } from '@winzeland/resources';
+import { loadResources } from '@winzeland/resources';
 
 async function main() {
-  const items = await listAllResources();
+  const items = await loadResources();
 
   const resource = await ethers.getContract('ResourcesERC1155');
 
@@ -11,13 +11,13 @@ async function main() {
       console.log(`${item.id} - ${item.name} already registered.`);
       continue;
     }
-    console.log(`${item.id} - ${item.name} registering...`);
+    console.log(`${item.id} - ${item.name} registering...`, item);
 
-    const tx = await resource.registerItem(item.id, {
-      name: item.name,
-      typeId: item.typeId,
-      subTypeId: 0, // @todo: add subtype
-    });
+    const tx = await resource.registerItem(item.id, [
+      item.name,
+      item.typeId,
+      item.subtypeId,
+    ]);
     console.log(item.name, tx.hash);
     await tx.wait();
   }
