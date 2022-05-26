@@ -1,5 +1,5 @@
 import { ethers } from 'hardhat';
-import { listAllResources } from '@winzeland/resources/dist';
+import { listAllResources } from '@winzeland/resources';
 
 async function main() {
   const items = await listAllResources();
@@ -7,15 +7,16 @@ async function main() {
   const resource = await ethers.getContract('ResourcesERC1155');
 
   for (const item of items) {
-    if (await resource.registeredItems(item.id)) {
+    if (await resource.registered(item.id)) {
       console.log(`${item.id} - ${item.name} already registered.`);
       continue;
     }
     console.log(`${item.id} - ${item.name} registering...`);
 
-    const tx = await resource.create({
+    const tx = await resource.registerItem(item.id, {
       name: item.name,
-      itemType: item.typeId,
+      typeId: item.typeId,
+      subTypeId: 0, // @todo: add subtype
     });
     console.log(item.name, tx.hash);
     await tx.wait();

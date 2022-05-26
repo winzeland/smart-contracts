@@ -15,32 +15,36 @@ contract ResourcesERC1155 is ERC1155TradableMixin {
 
     struct Metadata {
         string name;
-        uint8 itemType;
+        uint8 typeId;
+        uint8 subtypeId;
+    }
+
+    struct Attributes {
+        uint8 attr1;
+        int8 value1;
+        uint8 attr2;
+        int8 value2;
+        uint8 attr3;
+        int8 value3;
+        uint8 attr4;
+        int8 value4;
+        uint8 attr5;
+        int8 value5;
+        uint8 attr6;
+        int8 value6;
     }
 
     event ResourceRegistered(uint256 _id, Metadata _metadata);
+    event AttributesUpdated(uint256 _id, Attributes _attributes);
 
-    uint256 public tokenCount;
-    mapping(uint256 => Metadata) public items;
-    mapping(uint256 => bool) public registeredItems;
+    mapping(uint256 => Metadata) public metadata;
+    mapping(uint256 => Attributes) public attributes;
 
+    mapping(uint256 => bool) private _registered;
     string private __contractURI;
 
     constructor(string memory _uri, string memory _initContractURI) ERC1155TradableMixin(_uri) {
         __contractURI = _initContractURI;
-    }
-
-    function create(Metadata calldata _metadata) public onlyRole(CREATOR_ROLE) returns (uint256) {
-        uint256 id = tokenCount;
-        tokenCount = tokenCount + 1;
-
-        items[id] = _metadata;
-        registeredItems[id] = true;
-        _mint(_msgSender(), id, 0, "");
-
-        emit ResourceRegistered(id, _metadata);
-
-        return id;
     }
 
     function mint(
@@ -48,7 +52,7 @@ contract ResourcesERC1155 is ERC1155TradableMixin {
         uint256 id,
         uint256 amount
     ) public onlyRole(MINTER_ROLE) {
-        require(registeredItems[id], "resource is not registered.");
+        require(_registered[id], "resource is not registered.");
         _mint(to, id, amount, "");
     }
 
@@ -58,6 +62,27 @@ contract ResourcesERC1155 is ERC1155TradableMixin {
         uint256 value
     ) public onlyRole(BURNER_ROLE) {
         _burn(account, id, value);
+    }
+
+    function registerItem(uint256 _id, Metadata calldata _metadata) public onlyRole(CREATOR_ROLE) returns (uint256) {
+        require(!_registered[_id], "resource already registered.");
+        metadata[_id] = _metadata;
+        _registered[_id] = true;
+        _mint(_msgSender(), _id, 0, "");
+
+        emit ResourceRegistered(_id, _metadata);
+
+        return _id;
+    }
+
+    function updateAttributes(uint256 _id, Attributes calldata _attributes) public onlyRole(CREATOR_ROLE) {
+        require(_registered[_id], "resource is not registered.");
+        attributes[_id] = _attributes;
+        emit AttributesUpdated(_id, _attributes);
+    }
+
+    function registered(uint256 _id) public view returns (bool) {
+        return _registered[_id];
     }
 
     function contractURI() public view returns (string memory) {
