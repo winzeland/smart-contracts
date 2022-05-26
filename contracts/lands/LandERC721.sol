@@ -2,9 +2,9 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "../ERC721Tradable.sol";
+import "../mixins/ERC721TradableMixin.sol";
 
-contract LandERC721 is ERC721Tradable {
+contract LandERC721 is ERC721TradableMixin {
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
@@ -33,7 +33,7 @@ contract LandERC721 is ERC721Tradable {
     string private __baseURI;
     string private __contractURI;
 
-    constructor(address _genesisReceiver, string memory _initBaseURI, string memory _initContractURI) ERC721Tradable("Winzeland: Land", "Land") {
+    constructor(address _genesisReceiver, string memory _initBaseURI, string memory _initContractURI) ERC721TradableMixin("Winzeland: Land", "Land") {
         __baseURI = _initBaseURI;
         __contractURI = _initContractURI;
         // Mint genesis land

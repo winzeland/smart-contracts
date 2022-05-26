@@ -10,6 +10,8 @@ async function main() {
   const { signer } = await getNamedAccounts();
   const provider = await ethers.getSigner(signer);
 
+  console.log('signer', signer);
+
   let id = 1;
   const items = [];
 
@@ -18,7 +20,7 @@ async function main() {
       if (x === 0 && y === 0) {
         console.log(0, `x: ${x}; y: ${y}`);
         items.push({
-          id,
+          id: 0,
           traits: [0, 0, 0, 99, 1, 2, 3, 4, 10, 10, 10, 10],
           land: {
             x: 0,
@@ -43,8 +45,8 @@ async function main() {
           y,
         );
         items.push({ id, traits, land, hash, signature });
+        id++;
       }
-      id++;
     }
   }
 

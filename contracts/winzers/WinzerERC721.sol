@@ -2,9 +2,9 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "../ERC721Tradable.sol";
+import "../mixins/ERC721TradableMixin.sol";
 
-contract WinzerERC721 is ERC721Tradable {
+contract WinzerERC721 is ERC721TradableMixin {
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
@@ -44,7 +44,7 @@ contract WinzerERC721 is ERC721Tradable {
     string private __baseURI;
     string private __contractURI;
 
-    constructor(address _fatherReceiver, string memory _initBaseURI, string memory _initContractURI) ERC721Tradable("Winzeland: Winzer", "Winzer") {
+    constructor(address _fatherReceiver, string memory _initBaseURI, string memory _initContractURI) ERC721TradableMixin("Winzeland: Winzer", "Winzer") {
         __baseURI = _initBaseURI;
         __contractURI = _initContractURI;
         // minting "AllFather" as first winzer with all zero traits.

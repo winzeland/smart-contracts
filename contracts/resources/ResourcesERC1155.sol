@@ -4,28 +4,43 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/AccessControlEnumerable.sol";
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "../mixins/ERC1155TradableMixin.sol";
 
 
-contract ResourcesERC1155 is ERC1155, AccessControlEnumerable {
+contract ResourcesERC1155 is ERC1155TradableMixin {
 
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
     bytes32 public constant CREATOR_ROLE = keccak256("CREATOR_ROLE");
 
-    constructor() ERC1155("https://www.winzeland.com/meta/resources/{id}") {
-        _setupRole(DEFAULT_ADMIN_ROLE, _msgSender());
-
-        _mint(_msgSender(), 1, 10, "");
-        _mint(_msgSender(), 2, 15, "");
-        _mint(_msgSender(), 3, 15000, "");
+    struct Metadata {
+        string name;
+        uint8 itemType;
     }
 
-    function contractURI() public pure returns (string memory) {
-        return "https://www.winzeland.com/meta/contract/resources";
+    event ResourceRegistered(uint256 _id, Metadata _metadata);
+
+    uint256 public tokenCount;
+    mapping(uint256 => Metadata) public items;
+    mapping(uint256 => bool) public registeredItems;
+
+    string private __contractURI;
+
+    constructor(string memory _uri, string memory _initContractURI) ERC1155TradableMixin(_uri) {
+        __contractURI = _initContractURI;
     }
 
-    function create(string memory _name, uint256 _decimals) public onlyRole(CREATOR_ROLE) {
-        //
+    function create(Metadata calldata _metadata) public onlyRole(CREATOR_ROLE) returns (uint256) {
+        uint256 id = tokenCount;
+        tokenCount = tokenCount + 1;
+
+        items[id] = _metadata;
+        registeredItems[id] = true;
+        _mint(_msgSender(), id, 0, "");
+
+        emit ResourceRegistered(id, _metadata);
+
+        return id;
     }
 
     function mint(
@@ -33,6 +48,7 @@ contract ResourcesERC1155 is ERC1155, AccessControlEnumerable {
         uint256 id,
         uint256 amount
     ) public onlyRole(MINTER_ROLE) {
+        require(registeredItems[id], "resource is not registered.");
         _mint(to, id, amount, "");
     }
 
@@ -44,9 +60,11 @@ contract ResourcesERC1155 is ERC1155, AccessControlEnumerable {
         _burn(account, id, value);
     }
 
-    function supportsInterface(bytes4 interfaceId) public view virtual override(ERC1155, AccessControlEnumerable) returns (bool) {
-        return interfaceId == type(IERC1155).interfaceId
-         || interfaceId == type(IAccessControlEnumerable).interfaceId
-         || super.supportsInterface(interfaceId);
+    function contractURI() public view returns (string memory) {
+        return __contractURI;
+    }
+
+    function setContractURI(string memory uri) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        __contractURI = uri;
     }
 }
