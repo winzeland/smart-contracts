@@ -30,8 +30,8 @@ contract ResourcesERC1155 is ERC1155TradableMixin {
         int8 value4;
         uint8 attr5;
         int8 value5;
-        uint8 attr6;
-        int8 value6;
+        // uint8 attr6;
+        // int8 value6;
     }
 
     event MetadataUpdated(uint256 indexed _id, Metadata _metadata);
@@ -94,7 +94,7 @@ contract ResourcesERC1155 is ERC1155TradableMixin {
         return __contractURI;
     }
 
-    function setContractURI(string memory uri) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        __contractURI = uri;
+    function setContractURI(string memory _uri) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        __contractURI = _uri;
     }
 }

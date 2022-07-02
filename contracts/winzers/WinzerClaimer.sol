@@ -31,7 +31,7 @@ contract WinzerClaimer is Context {
         _dna.eyes = random(8, 11);
         _dna.eyebrows = random(9, 10);
         _dna.nose = random(10, 4);
-        _dna.scars = random(11, 3);
+        // _dna.scars = random(11, 3);
 
         WinzerERC721.DNA2 memory _extraDna;
         _extraDna.makeup = random(12, 6);

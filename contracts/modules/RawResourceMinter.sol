@@ -56,7 +56,7 @@ contract RawResourceMinter is Ownable {
 
     function assign(uint256 _winzerId, uint256 _landId, uint8 _landZone) public returns (bytes32) {
         bytes32 zone = keccak256(abi.encode(_landId, _landZone));
-        (uint8 resource, uint8 level) = getResource(_landId, _landZone);
+        (uint8 resource,) = getResource(_landId, _landZone);
         require(resource != 0, "land has no resource.");
         require(workspace[zone].startedAt == 0, "Already working.");
         require(winzerContract.ownerOf(_winzerId) == _msgSender(), "You must be owner of winzer.");
@@ -115,7 +115,7 @@ contract RawResourceMinter is Ownable {
     }
 
     function getResource(uint256 _landId, uint256 _landZone) public view returns (uint8, uint8) {
-        (,,,, uint8 resource1, uint8 resource2, uint8 resource3, uint8 resource4, uint8 resourceLevel1, uint8 resourceLevel2, uint8 resourceLevel3, uint8 resourceLevel4) = landContract.properties(_landId);
+        (,,,, uint8 resource1, uint8 resource2, uint8 resource3, uint8 resource4, uint8 resourceLevel1, uint8 resourceLevel2, uint8 resourceLevel3) = landContract.properties(_landId);
         if (_landZone == 0) {
             return (resource1, resourceLevel1);
         } else if (_landZone == 1) {
@@ -123,7 +123,7 @@ contract RawResourceMinter is Ownable {
         } else if (_landZone == 2) {
            return (resource3, resourceLevel3); 
         } else if (_landZone == 3) {
-           return (resource4, resourceLevel4); 
+           return (resource4, resourceLevel3); 
         }
         return (0, 0);
     }
