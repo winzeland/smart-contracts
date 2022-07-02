@@ -31,8 +31,7 @@ contract LandClaimer is Ownable, ContextMixin {
             _properties.resource4,
             _properties.resourceLevel1,
             _properties.resourceLevel2,
-            _properties.resourceLevel3,
-            _properties.resourceLevel4
+            _properties.resourceLevel3
         );
 
         bytes32 _hash = keccak256(props);

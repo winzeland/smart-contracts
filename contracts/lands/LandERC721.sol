@@ -20,7 +20,7 @@ contract LandERC721 is ERC721TradableMixin {
         uint8 resourceLevel1;
         uint8 resourceLevel2;
         uint8 resourceLevel3;
-        uint8 resourceLevel4;
+        // uint8 resourceLevel4;
     }
 
     event PropertiesUpdated(uint256 indexed _tokenId, Properties _props);
@@ -46,7 +46,7 @@ contract LandERC721 is ERC721TradableMixin {
         _properties.resourceLevel1 = 10;
         _properties.resourceLevel2 = 10;
         _properties.resourceLevel3 = 10;
-        _properties.resourceLevel4 = 10;
+        // _properties.resourceLevel4 = 10;
         _setProperties(0, _properties);
         _mint(_genesisReceiver, 0);
     }

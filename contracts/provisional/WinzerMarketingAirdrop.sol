@@ -38,7 +38,7 @@ contract WinzerMarketingAirdrop is Ownable {
         _dna.eyes = 9;
         _dna.eyebrows = 8;
         _dna.nose = 2;
-        _dna.scars = 0;
+        // _dna.scars = 0;
 
         WinzerERC721.DNA2 memory _extraDna;
         _extraDna.makeup = 4;
